@@ -1,12 +1,11 @@
 import unittest
 import sys
+import os
 
-
-sys.path.append('../../lab2')
-
+parent_dir = os.path.abspath(os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")), ".."))
+sys.path.append(parent_dir)
 
 from src.lab2.caesar import encrypt_caesar, decrypt_caesar
-
 class TestCaesarCipher(unittest.TestCase):
     def test_encrypt_caesar(self):
         self.assertEqual(encrypt_caesar("PYTHON"), 'SBWKRQ')
