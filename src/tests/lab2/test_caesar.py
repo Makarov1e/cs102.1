@@ -2,10 +2,9 @@ import unittest
 import sys
 
 
-sys.path.append('../../lab2')
-
-
 from src.lab2.caesar import encrypt_caesar, decrypt_caesar
+
+sys.path.append('../../lab2')
 
 class TestCaesarCipher(unittest.TestCase):
     def test_encrypt_caesar(self):
