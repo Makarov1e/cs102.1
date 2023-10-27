@@ -1,7 +1,9 @@
 import unittest
 import sys
+import os
 
-sys.path.append('../../lab2')
+parent_dir = os.path.abspath(os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")), ".."))
+sys.path.append(parent_dir)
 
 from src.lab2.vigenre import encrypt_vigenere, decrypt_vigenere
 
