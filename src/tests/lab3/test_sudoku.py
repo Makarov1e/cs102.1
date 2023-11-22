@@ -76,8 +76,22 @@ class SudokuTestCase(unittest.TestCase):
         grid4 = ([['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']])
         assert find_empty_positions(grid4) == (2, 0)
 
+    def test_find_possible_values(self):
+        grid = [['5', '3', ' ', ' ', '7', ' ', ' ', ' ', ' '],
+                ['6', ' ', ' ', '1', '9', '5', ' ', ' ', ' '],
+                [' ', '9', '8', ' ', ' ', ' ', ' ', '6', ' '],
+                ['8', ' ', ' ', ' ', '6', ' ', ' ', ' ', '3'],
+                ['4', ' ', ' ', '8', ' ', '3', ' ', ' ', '1'],
+                ['7', ' ', ' ', ' ', '2', ' ', ' ', ' ', '6'],
+                [' ', '6', ' ', ' ', ' ', ' ', '2', '8', ' '],
+                [' ', ' ', ' ', '4', '1', '9', ' ', ' ', '5'],
+                [' ', ' ', ' ', ' ', '8', ' ', ' ', '7', '9']]
 
+        values = find_possible_values(grid, (0, 2))
+        self.assertEqual(values, {'1', '2', '4'})
 
+        values = find_possible_values(grid, (4, 7))
+        self.assertEqual(values, {'2', '5', '9'})
 
 
 if __name__ == '__main__':
