@@ -187,7 +187,7 @@ def check_solution(solution: tp.List[tp.List[str]]) -> bool:
     for i in range(9):
         row_values = set(get_row(solution, (i, 0)))
         col_values = set(get_col(solution, (0, i)))
-        if len(row_values) != 9 or len(col_values) != 9 or row_values != col_values:
+        if len(row_values) != 9 or len(col_values) != 9:
             return False
 
     for i in range(0, 9, 3):
@@ -218,23 +218,33 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
     >>> check_solution(solution)
     True
     """
-    grid = [['.' for i in range(9)] for i in range(9)]
+    grid = [["."] * 9 for i in range(9)]
+    for i in range(9):
+        a = find_possible_values(grid, [i, i])
+        a_list = list(a)
+        if a_list:
+            pos = random.randint(0, len(a_list) - 1)
+            grid[i][i] = a_list[pos]
 
-    for i in range(N):
-        row = random.randint(0, 8)
-        col = random.randint(0, 8)
-        value = random.randint(1, 9)
-        grid[row][col] = str(value)
-    solution = solve(grid)
-    while solution is None or solve(grid) != solution:
-        grid = [['.' for _ in range(9)] for _ in range(9)]
-        for i in range(N):
-            row = random.randint(0, 8)
-            col = random.randint(0, 8)
-            value = random.randint(1, 9)
-            grid[row][col] = str(value)
-        solution = solve(grid)
+    for i in range(8, -1, -1):
+        a = find_possible_values(grid, [i, 8 - i])
+        a_list = list(a)
+        if a_list:
+            pos = random.randint(0, len(a_list) - 1)
+            grid[i][8 - i] = a_list[pos]
 
+    grid_solved = solve(grid)
+    vals = []
+    for i in range(0, 9):
+        for j in range(0, 9):
+            vals.append([i, j])
+    count = 0
+    N = 81 - N
+    while count < N:
+        b = vals[random.randint(0, len(vals) - 1)]
+        grid_solved[b[0]][b[1]] = "."
+        vals.remove(b)
+        count += 1
     return grid
 
 
