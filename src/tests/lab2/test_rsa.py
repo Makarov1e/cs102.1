@@ -1,7 +1,10 @@
 import unittest
 import sys
-sys.path.append('../../lab2')
-from src.lab2.rsa import is_prime, gcd, multiplicative_inverse, generate_keypair, encrypt, decrypt
+import os
+
+parent_dir = os.path.abspath(os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")), ".."))
+sys.path.append(parent_dir)
+from src.lab2.rsa import is_prime, gcd, multiplicative_inverse, generate_keypair
 
 class TestRSAFunctions(unittest.TestCase):
 
